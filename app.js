@@ -1,6 +1,4 @@
 
-let human;
-
 let humanTurn = [];
 
 let computerTurn = [];
@@ -36,6 +34,8 @@ let winCombo = [
     [3,6,9], [1,5,9], [3,5,7]
 ]
 
+window.onLoad = playGame();
+
 resetTheGame.forEach(function(resetGame) {
     resetGame.addEventListener('click', gameReset);
 });
@@ -51,11 +51,7 @@ boardCells.forEach(function(gameboard) {
 })
 
 function cellClicked(e) {
-    if (human) {
-        e.target.textContent = 'X';
-    } else {
-        'O';
-    }
+    
 }
 
 function playGame() {
@@ -77,25 +73,23 @@ function playGame() {
 
 function player() {
     for (let i = 0; i < boardCells.length; i++) {
-        boardCells[i].addEventListener('Click', function() {
-            if (
-                computerTurn.indexOf(Number(this.id)) !== -1 ||
-                playerTurn.indexOf(Number(this.id)) !== -1
-            ) {
-            return;
-            }
-
-            document.getElementsById([0])('Clicked');
-            humanTurn.push(Number(this.id));
-            nextTurn('Computer', humanTurn);
-        });
-    }
+        if (cellClicked()) {
+         let (computerTurn.indexOf(Number(this.id)) !== -1 ||
+            playerTurn.indexOf(Number(this.id)) !== -1
+        ) 
+        return;
+        }
+        document.getElementsById([0])('Clicked');
+        humanTurn.push(Number(this.id));
+        nextTurn('Computer', humanTurn);
+    };
 }
+
 
 function computer() {
     intelligentComputer();
     let random = pickRandomCell();
-    for (let i = 0; i < boardCellsLength; i++) {
+    for (let i = 0; i < boardCells.Length; i++) {
         if (totalTurns === 9 && !isThereAWinner) {
             return;
         } else if (
@@ -124,6 +118,14 @@ function pickRandomCell() {
             random = intelligentComputerNextMove;
             playerAboutToWin = false;
         } else {
-            random = Math.floor
+            random = Math.floor(Math.random() * boardCells.length);
         }
+        return boardCells[random];
+    }
+}
+
+function intelligentComputer() {
+    let playerPotentialWins = winningCombinations.filter(
+        array
+    )
 }
