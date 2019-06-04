@@ -63,7 +63,7 @@ function playGame() {
     }
 
     else if (whoseTurn === 'Player' || totalTurns === 0) {
-        playerTurn();
+        player();
     } else if (whoseTurn === 'Computer') {
         setTimeout(function() {
             computer();
@@ -75,7 +75,7 @@ function player() {
     for (let i = 0; i < boardCells.length; i++) {
         if (cellClicked()) {
          let (computerTurn.indexOf(Number(this.id)) !== -1 ||
-            playerTurn.indexOf(Number(this.id)) !== -1
+            humanTurn.indexOf(Number(this.id)) !== -1
         ) 
         return;
         }
@@ -94,7 +94,7 @@ function computer() {
             return;
         } else if (
             computerTurn.indexOf(Number(random.id)) !== -1 ||
-            playerTurn.indexOf(Number(random.id)) !== -1
+            humanTurn.indexOf(Number(random.id)) !== -1
         ) {
             return computer();
         }
@@ -113,7 +113,7 @@ function pickRandomCell() {
     if (playerAboutToWin) {
         if (
             computerTurn.indexOf(intelligentComputerNextMove) === -1 &&
-            playerTurn.indexOfintelligentComputerNextMove0 === -1 
+            humanTurn.indexOfintelligentComputerNextMove0 === -1 
         ) {
             random = intelligentComputerNextMove;
             playerAboutToWin = false;
@@ -125,7 +125,26 @@ function pickRandomCell() {
 }
 
 function intelligentComputer() {
-    let playerPotentialWins = winningCombinations.filter(
-        array
-    )
-}
+    let playerPotentialWins = winCombo.filter(
+    array =>
+        array.filter(item => {
+            return humanTurn.indexOf(item) > -1;
+        }).length === 2
+    );
+
+    if (playerPotentialWins.length > 0) {
+        playerAboutToWin = true;
+        playerPotentialWins.filter(array =>
+            array.filter(item => {
+                if (
+                    playerPotentialWins.indexOf(item) === -1 &&
+                    humanTurn.indexOf(item) === -1 &&
+                    computerTurn.indexOf(item) === -1
+                ) {
+                    intelligentComputerNextMove = item;
+                }
+            })
+        );
+    }
+}   
+
