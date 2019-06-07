@@ -14,25 +14,13 @@ let playerAboutToWin = false;
 let intelligentComputerNextMove;
 
 
-
-let resetTheGame = document.querySelectorAll('.resetGame');
-
-let boardCells = [
-    document.getElementsByClassName('cellTl')[0],
-    document.getElementsByClassName('cellTm')[0],
-    document.getElementsByClassName('cellTr')[0],
-    document.getElementsByClassName('cellMl')[0],
-    document.getElementsByClassName('cellMm')[0],
-    document.getElementsByClassName('cellMr')[0],
-    document.getElementsByClassName('cellBl')[0],
-    document.getElementsByClassName('cellBm')[0],
-    document.getElementsByClassName('cellBr')[0],
-];
-
 let winCombo = [
     [1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,4],
     [3,6,9], [1,5,9], [3,5,7]
 ]
+
+let boardCells = document.querySelectorAll('.gameboard');
+let resetTheGame = document.querySelectorAll('.resetGame');
 
 window.onLoad = playGame();
 
@@ -40,19 +28,20 @@ resetTheGame.forEach(function(resetGame) {
     resetGame.addEventListener('click', gameReset);
 });
 
+
+
+
 function gameReset() {
     for (let i = 0; i < boardCells.length; i++) {
         boardCells[i].innerHTML = '';
     }
+    humanTurn = [];
+    computerTurn = [];
+    totalTurns = 0;
+    isThereAWinner = false;
+    playerAboutToWin = false;
 }
 
-boardCells.forEach(function(gameboard) {
-    gameboard.addEventListener('click', cellClicked);
-})
-
-function cellClicked(e) {
-    
-}
 
 function playGame() {
     if (totalTurns === 9 && !isThereAWinner) {
@@ -72,17 +61,18 @@ function playGame() {
 }
 
 function player() {
-    for (let i = 0; i < boardCells.length; i++) {
-        if (cellClicked()) {
-         let (computerTurn.indexOf(Number(this.id)) !== -1 ||
-            humanTurn.indexOf(Number(this.id)) !== -1
-        ) 
-        return;
-        }
-        document.getElementsById([0])('Clicked');
-        humanTurn.push(Number(this.id));
-        nextTurn('Computer', humanTurn);
-    };
+        for (let i = 0; i < boardCells.length; i++) {
+            boardCells[i].addEventListener('Click', function() {
+            if (computerTurn.indexOf(Number(this.id)) !== -1 ||
+                humanTurn.indexOf(Number(this.id)) !== -1
+            ) {
+            return;
+            }
+            this.getElementById('')[0]('Clicked');
+            humanTurn.push(Number(this.id));
+            nextTurn('Computer', humanTurn);
+        });
+    }
 }
 
 
