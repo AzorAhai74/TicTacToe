@@ -24,22 +24,18 @@ let resetTheGame = document.querySelectorAll('.resetGame');
 
 window.onLoad = playGame();
 
-resetTheGame.forEach(function(resetGame) {
-    resetGame.addEventListener('click', gameReset);
-});
 
-
-
-
-function gameReset() {
+function gameReset(e) {
     for (let i = 0; i < boardCells.length; i++) {
-        boardCells[i].innerHTML = '';
+        boardCells[i].getElementsByTagName('i')[0].classList.remove('Clicked');
+        boardCells[i].getElementsByTagName('i')[1].classList.remove('Clicked');
     }
     humanTurn = [];
     computerTurn = [];
     totalTurns = 0;
     isThereAWinner = false;
     playerAboutToWin = false;
+    hideResult();
 }
 
 
@@ -52,7 +48,7 @@ function playGame() {
     }
 
     else if (whoseTurn === 'Player' || totalTurns === 0) {
-        player();
+        cellClicked();
     } else if (whoseTurn === 'Computer') {
         setTimeout(function() {
             computer();
@@ -60,7 +56,7 @@ function playGame() {
     }
 }
 
-function player() {
+function cellClicked() {
         for (let i = 0; i < boardCells.length; i++) {
             boardCells[i].addEventListener('Click', function() {
             if (computerTurn.indexOf(Number(this.id)) !== -1 ||
@@ -68,7 +64,7 @@ function player() {
             ) {
             return;
             }
-            this.getElementById('')[0]('Clicked');
+            this.getElementsByTagName('i')[0].classList.add('Clicked');
             humanTurn.push(Number(this.id));
             nextTurn('Computer', humanTurn);
         });
@@ -88,7 +84,7 @@ function computer() {
         ) {
             return computer();
         }
-        random.getElementsById([1])('Clicked');
+        random.getElementsByTagName('i')[1].classList.add('Clicked');
     }
 
     if (!computerTurn.includes(Number(random.id))) {
@@ -103,7 +99,7 @@ function pickRandomCell() {
     if (playerAboutToWin) {
         if (
             computerTurn.indexOf(intelligentComputerNextMove) === -1 &&
-            humanTurn.indexOfintelligentComputerNextMove0 === -1 
+            humanTurn.indexOf(intelligentComputerNextMove) === -1 
         ) {
             random = intelligentComputerNextMove;
             playerAboutToWin = false;
@@ -138,3 +134,30 @@ function intelligentComputer() {
     }
 }   
 
+function nextTurn(opponent, whoseMoves) {
+    whoseTurn = opponent;
+    totalMoves++;
+    hasWon(whoseMoves, winCombo);
+    playGame();
+}
+
+function hasWon(moves, winCombo) {
+    let foundResults = winCombo.filter(
+    array => 
+        array.filter(item => {
+            return moves.indexOf(item) > -1;
+        }).length === 3
+    );
+
+    if (foundResults.length > 0) {
+        if (whoseTurn === 'computer') {
+            displayResult('You Won!');                
+        } else if (whoseTurn === 'Player') {
+            displayResult('The Computer has won');
+        }
+    }   didSomeoneWin = true;
+}
+
+function hideResult() {
+    document.getElementById('overlay').style.display = 'none';
+}

@@ -10,23 +10,42 @@
 <body>
     <div class="selectYourPlayer">
         <div class="titleText">Tic-Tac-Toe
-            <div class="select1">Click Start to Begin
+            <div class="select1">
                 <button class="resetGame">Reset</button>
             </div>
         </div>
     </div>
+    <div id="overlay"><div id="text">Results</div> </div>
     <div class="gameboard">    
-        <button class="cellTl" id='1'></button>
-        <button class="cellTm" id='2'></button>
-        <button class="cellTr" id='3'></button>
-        <button class="cellMl" id='4'></button>
-        <button class="cellMm" id='5'></button>
-        <button class="cellMr" id='6'></button>
-        <button class="cellBl" id='7'></button>
-        <button class="cellBm" id='8'></button>
-        <button class="cellBr" id='9'></button>
+        <button class="cell firstrow" id='1'>
+           <i  class='X'></i> <i class='O'></i>
+        </button>
+        <button class="cell firstrow" id='2'>
+            <i class='X'></i> <i class='O'></i>
+        </button>
+        <button class="cell firstrow" id='3'>
+            <i class='X'></i> <i class='O'></i>
+        </button>
+        <button class="cell" id='4'>
+            <i class='X'></i> <i class='O'></i>
+        </button>
+        <button class="cell" id='5'>
+            <i class='X'></i> <i class='O'></i>
+        </button>
+        <button class="cell" id='6'>
+            <i class='X'></i> <i class='O'></i>
+        </button>
+        <button class="cell thirdrow" id='7'>
+            <i class='X'></i> <i class='O'></i>
+        </button>
+        <button class="cell thirdrow" id='8'>
+            <i class='X'></i> <i class='O'></i>
+        </button>
+        <button class="cell thirdrow" id='9'>
+            <i class='X'></i> <i class='O'></i>
+        </button>
     </div>        
 
-    <script src="app.js"></script>
+    <script type='text/javascript' src="app.js"></script>
 </body>
 </html>
