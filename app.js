@@ -1,163 +1,114 @@
-
-let humanTurn = [];
-
-let computerTurn = [];
-
-let totalTurns = 0;
-
-let whoseTurn = '';
-
-let isThereAWinner = false;
-
-let playerAboutToWin = false;
-
-let intelligentComputerNextMove;
+let players = ['X', 'O'];
+let currentTurn = 0;
+let gameOver = false;
+let draw = false;
 
 
-let winCombo = [
-    [1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,4],
-    [3,6,9], [1,5,9], [3,5,7]
-]
 
-let boardCells = document.querySelectorAll('.gameboard');
-let resetTheGame = document.querySelectorAll('.resetGame');
+let cells = document.querySelectorAll('.cell');
 
-window.onLoad = playGame();
+cells.forEach(function(cell) {
+    cell.addEventListener('click', cellClicked);
+});
+
+function startGame() {
+    e.target.innerHTML = 'X';
+    document.getElementById('message').innerHTML = 'X takes their Turn';
+};
 
 
-function gameReset(e) {
-    for (let i = 0; i < boardCells.length; i++) {
-        boardCells[i].getElementsByTagName('i')[0].classList.remove('Clicked');
-        boardCells[i].getElementsByTagName('i')[1].classList.remove('Clicked');
+function cellClicked(e) {
+    if (gameOver === true) {
+        clearBoard();
+        return;
     }
-    humanTurn = [];
-    computerTurn = [];
-    totalTurns = 0;
-    isThereAWinner = false;
-    playerAboutToWin = false;
-    hideResult();
+
+    if (e.target.innerHTML === 'X' || e.target.innerHTML === 'O') {
+        return;
+    }
+
+    e.target.innerHTML = players[currentTurn];
+    checkWinner();
+    checkDraw();
+    toggle();
+
+    function clearBoard() {
+        location.reload();
+    }
+};
+
+function toggle() {
+    if (currentTurn === 0) {
+        currentTurn = 1;
+    } else {
+        currentTurn = 0;
+    }
+    document.getElementById('message').innerHTML = players[currentTurn] + " 's Turn";
 }
 
 
-function playGame() {
-    if (totalTurns === 9 && !isThereAWinner) {
-        displayResult('Tie Game :/');
-        setTimeout(function() {
-            gameReset();
-        }, 1000);
-    }
-
-    else if (whoseTurn === 'Player' || totalTurns === 0) {
-        cellClicked();
-    } else if (whoseTurn === 'Computer') {
-        setTimeout(function() {
-            computer();
-        }, 200);
-    }
-}
-
-function cellClicked() {
-        for (let i = 0; i < boardCells.length; i++) {
-            boardCells[i].addEventListener('Click', function() {
-            if (computerTurn.indexOf(Number(this.id)) !== -1 ||
-                humanTurn.indexOf(Number(this.id)) !== -1
-            ) {
-            return;
-            }
-            this.getElementsByTagName('i')[0].classList.add('Clicked');
-            humanTurn.push(Number(this.id));
-            nextTurn('Computer', humanTurn);
-        });
-    }
-}
 
 
-function computer() {
-    intelligentComputer();
-    let random = pickRandomCell();
-    for (let i = 0; i < boardCells.Length; i++) {
-        if (totalTurns === 9 && !isThereAWinner) {
-            return;
-        } else if (
-            computerTurn.indexOf(Number(random.id)) !== -1 ||
-            humanTurn.indexOf(Number(random.id)) !== -1
-        ) {
-            return computer();
-        }
-        random.getElementsByTagName('i')[1].classList.add('Clicked');
-    }
-
-    if (!computerTurn.includes(Number(random.id))) {
-        computerTurn.push(Number(random.id));
-    }
-    nextTurn('Player', computerTurn);
+function checkWinner(e) {
+    if (document.getElementById('topLeft').innerHTML === 'X' && document.getElementById('topCenter').innerHTML === 'X' && document.getElementById('topRight').innerHTML === 'X' ||
+        document.getElementById('middleLeft').innerHTML === 'X' && document.getElementById('middleCenter').innerHTML === 'X' && document.getElementById('middleRight').innerHTML === 'X' ||
+        document.getElementById('bottomLeft').innerHTML === 'X' && document.getElementById('bottomCenter').innerHTML === 'X' && document.getElementById('bottomRight').innerHTML === 'X' ||
+        document.getElementById('topLeft').innerHTML === 'X' && document.getElementById('middleLeft').innerHTML === 'X' && document.getElementById('bottomLeft').innerHTML === 'X' || 
+        document.getElementById('topCenter').innerHTML === 'X' && document.getElementById('middleCenter').innerHTML === 'X' && document.getElementById('bottomCenter').innerHTML === 'X' ||
+        document.getElementById('topRight').innerHTML === 'X' && document.getElementById('middleRight').innerHTML === 'X' && document.getElementById('bottomRight').innerHTML === 'X' ||
+        document.getElementById('topLeft').innerHTML === 'X' && document.getElementById('middleCenter').innerHTML === 'X' && document.getElementById('bottomRight').innerHTML === 'X' ||
+        document.getElementById('topRight').innerHTML === 'X' && document.getElementById('middleCenter').innerHTML === 'X' && document.getElementById('middleRight').innerHTML === 'X') 
+        {
     
-}
+            gameOver = true;
+            setTimeout(function() {
+                alert('X Wins the Game!');
+            }, 100);
+            document.getElementById('message').innerHTML = 'Game Over';
+    } else if
+        (document.getElementById('topLeft').innerHTML === 'O' && document.getElementById('topCenter').innerHTML === 'O' && document.getElementById('topRight').innerHTML === 'O' ||
+        document.getElementById('middleLeft').innerHTML === 'O' && document.getElementById('middleCenter').innerHTML === 'O' && document.getElementById('middleRight').innerHTML === 'O' ||
+        document.getElementById('bottomLeft').innerHTML === 'O' && document.getElementById('bottomCenter').innerHTML === 'O' && document.getElementById('bottomRight').innerHTML === 'O' ||
+        document.getElementById('topLeft').innerHTML === 'O' && document.getElementById('middleLeft').innerHTML === 'O' && document.getElementById('bottomLeft').innerHTML === 'O' || 
+        document.getElementById('topCenter').innerHTML === 'O' && document.getElementById('middleCenter').innerHTML === 'O' && document.getElementById('bottomCenter').innerHTML === 'O' ||
+        document.getElementById('topRight').innerHTML === 'O' && document.getElementById('middleRight').innerHTML === 'O' && document.getElementById('bottomRight').innerHTML === 'O' ||
+        document.getElementById('topLeft').innerHTML === 'O' && document.getElementById('middleCenter').innerHTML === 'O' && document.getElementById('bottomRight').innerHTML === 'O' ||
+        document.getElementById('topRight').innerHTML === 'O' && document.getElementById('middleCenter').innerHTML === 'O' && document.getElementById('middleRight').innerHTML === 'O')
+        {
 
-function pickRandomCell() {
-    let random;
-    if (playerAboutToWin) {
-        if (
-            computerTurn.indexOf(intelligentComputerNextMove) === -1 &&
-            humanTurn.indexOf(intelligentComputerNextMove) === -1 
-        ) {
-            random = intelligentComputerNextMove;
-            playerAboutToWin = false;
-        } else {
-            random = Math.floor(Math.random() * boardCells.length);
-        }
-        return boardCells[random];
+            gameOver = true;
+            setTimeout(function() {
+                alert('O Wins the Game!');
+            }, 100);
+            document.getElementById('message').innerHTML = 'Game Over';
+
     }
-}
+};
 
-function intelligentComputer() {
-    let playerPotentialWins = winCombo.filter(
-    array =>
-        array.filter(item => {
-            return humanTurn.indexOf(item) > -1;
-        }).length === 2
-    );
-
-    if (playerPotentialWins.length > 0) {
-        playerAboutToWin = true;
-        playerPotentialWins.filter(array =>
-            array.filter(item => {
-                if (
-                    playerPotentialWins.indexOf(item) === -1 &&
-                    humanTurn.indexOf(item) === -1 &&
-                    computerTurn.indexOf(item) === -1
-                ) {
-                    intelligentComputerNextMove = item;
-                }
-            })
-        );
+function checkDraw(e) {
+    if (document.getElementById([1]) === 'X' || document.getElementById([1]) === 'O' &&
+    document.getElementById([2]) === 'X' || document.getElementById([2]) === 'O' &&
+    document.getElementById([3]) === 'X' || document.getElementById([3]) === 'O' &&
+    document.getElementById([4]) === 'X' || document.getElementById([4]) === 'O' &&
+    document.getElementById([5]) === 'X' || document.getElementById([5]) === 'O' &&
+    document.getElementById([6]) === 'X' || document.getElementById([5]) === 'O' &&
+    document.getElementById([7]) === 'X' || document.getElementById([7]) === 'O' &&
+    document.getElementById([8]) === 'X' || document.getElementById([8]) === 'O' &&
+    document.getElementById([9]) === 'X' || document.getElementById([9]) === 'O') { 
+    {
+    
+            draw = true;
+            setTimeout(function() {
+                alert('Tie Game!');
+            }, 100);
+            document.getElementById('nessage').innerHTML = 'Game Over';
+        }  
     }
-}   
+};
 
-function nextTurn(opponent, whoseMoves) {
-    whoseTurn = opponent;
-    totalMoves++;
-    hasWon(whoseMoves, winCombo);
-    playGame();
-}
 
-function hasWon(moves, winCombo) {
-    let foundResults = winCombo.filter(
-    array => 
-        array.filter(item => {
-            return moves.indexOf(item) > -1;
-        }).length === 3
-    );
 
-    if (foundResults.length > 0) {
-        if (whoseTurn === 'computer') {
-            displayResult('You Won!');                
-        } else if (whoseTurn === 'Player') {
-            displayResult('The Computer has won');
-        }
-    }   didSomeoneWin = true;
-}
 
-function hideResult() {
-    document.getElementById('overlay').style.display = 'none';
-}
+
+
+

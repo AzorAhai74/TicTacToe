@@ -11,41 +11,22 @@
     <div class="selectYourPlayer">
         <div class="titleText">Tic-Tac-Toe
             <div class="select1">
-                <button class="resetGame">Reset</button>
+                <button value="Refresh Page" onClick="window.location.reload()"; class="resetGame">Reset</button>
             </div>
         </div>
     </div>
-    <div id="overlay"><div id="text">Results</div> </div>
     <div class="gameboard">    
-        <button class="cell firstrow" id='1'>
-           <i  class='X'></i> <i class='O'></i>
-        </button>
-        <button class="cell firstrow" id='2'>
-            <i class='X'></i> <i class='O'></i>
-        </button>
-        <button class="cell firstrow" id='3'>
-            <i class='X'></i> <i class='O'></i>
-        </button>
-        <button class="cell" id='4'>
-            <i class='X'></i> <i class='O'></i>
-        </button>
-        <button class="cell" id='5'>
-            <i class='X'></i> <i class='O'></i>
-        </button>
-        <button class="cell" id='6'>
-            <i class='X'></i> <i class='O'></i>
-        </button>
-        <button class="cell thirdrow" id='7'>
-            <i class='X'></i> <i class='O'></i>
-        </button>
-        <button class="cell thirdrow" id='8'>
-            <i class='X'></i> <i class='O'></i>
-        </button>
-        <button class="cell thirdrow" id='9'>
-            <i class='X'></i> <i class='O'></i>
-        </button>
+        <div class="cell" id='topLeft'> </div>
+        <div class="cell" id='topCenter'> </div>
+        <div class="cell" id='topRight'> </div>
+        <div class="cell" id='middleLeft'> </div>
+        <div class="cell" id='middleCenter'> </div>
+        <div class="cell" id='middleRight'> </div>
+        <div class="cell" id='bottomLeft'> </div>
+        <div class="cell" id='bottomCenter'> </div>
+        <div class="cell" id='bottomRight'> </div>
     </div>        
 
-    <script type='text/javascript' src="app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
