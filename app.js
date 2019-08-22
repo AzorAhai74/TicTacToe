@@ -2,18 +2,42 @@ let players = ['X', 'O'];
 let currentTurn = 0;
 let gameOver = false;
 let draw = false;
+let blankCell = false;
+
 
 
 
 let cells = document.querySelectorAll('.cell');
 
+let gameboardCells = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9'];
+
+
+
+let topLeft = document.getElementById([1]);
+let topCenter = document.getElementById([2]);
+let topRight = document.getElementById([3]);
+let middleLeft = document.getElementById([4]);
+let middleCenter = document.getElementById([5]);
+let middleRight = document.getElementById([6]);
+let bottomLeft = document.getElementById([7]);
+let bottomCenter = document.getElementById([8]);
+let bottomRight = document.getElementById([9]);
+
 cells.forEach(function(cell) {
     cell.addEventListener('click', cellClicked);
 });
 
+function validateCell() {
+	if (gameboardCells == '') {
+		blankCell = true;
+	} else {
+		blankCell = false;
+		return false;
+	}
+};
+
 function startGame() {
-    e.target.textContent = 'You are X';
-    alert(e.target.textContent);
+    alert('You are X');
 };
 
 
@@ -23,18 +47,14 @@ function cellClicked(e) {
         return;
     }
 
-    if (e.target.innerHTML === 'X' || e.target.innerHTML === 'O') {
+    if (e.target.textContent === 'X' || e.target.textContent === 'O') {
         return;
     }
 
-    e.target.innerHTML = players[currentTurn];
-    checkWinner();
-    checkDraw();
+    e.target.textContent = players[currentTurn];
+	startGame();
     toggle();
-
-    function clearBoard() {
-        location.reload();
-    }
+    
 };
 
 function toggle() {
@@ -45,68 +65,26 @@ function toggle() {
     }
 }
 
+function computerTurn() {
+	var blanks = [];
+	var place = gameboardCells[i].innerText;	
+	if (place == '') {
+		blanks.push([i]);
+	}
+	for (var i = 1; i <= 9; i++) {
+		if (blanks.length > 0) {
+		var randomNumber = Math.floor((Math.random() * 9) + 1);
+		var randomSquare = ('cell' + randomNumber);
+		validateCell(randomSquare);
+		toggle();
+		}
 
-
-
-function checkWinner(e) {
-    if (document.getElementById('topLeft').innerHTML === 'X' && document.getElementById('topCenter').innerHTML === 'X' && document.getElementById('topRight').innerHTML === 'X' ||
-        document.getElementById('middleLeft').innerHTML === 'X' && document.getElementById('middleCenter').innerHTML === 'X' && document.getElementById('middleRight').innerHTML === 'X' ||
-        document.getElementById('bottomLeft').innerHTML === 'X' && document.getElementById('bottomCenter').innerHTML === 'X' && document.getElementById('bottomRight').innerHTML === 'X' ||
-        document.getElementById('topLeft').innerHTML === 'X' && document.getElementById('middleLeft').innerHTML === 'X' && document.getElementById('bottomLeft').innerHTML === 'X' || 
-        document.getElementById('topCenter').innerHTML === 'X' && document.getElementById('middleCenter').innerHTML === 'X' && document.getElementById('bottomCenter').innerHTML === 'X' ||
-        document.getElementById('topRight').innerHTML === 'X' && document.getElementById('middleRight').innerHTML === 'X' && document.getElementById('bottomRight').innerHTML === 'X' ||
-        document.getElementById('topLeft').innerHTML === 'X' && document.getElementById('middleCenter').innerHTML === 'X' && document.getElementById('bottomRight').innerHTML === 'X' ||
-        document.getElementById('topRight').innerHTML === 'X' && document.getElementById('middleCenter').innerHTML === 'X' && document.getElementById('middleRight').innerHTML === 'X') 
-        {
-    
-            gameOver = true;
-            setTimeout(function() {
-                alert('X Wins the Game!');
-            }, 100);
-    } else if 
-        (document.getElementById('topLeft').innerHTML === 'O' && document.getElementById('topCenter').innerHTML === 'O' && document.getElementById('topRight').innerHTML === 'O' ||
-        document.getElementById('middleLeft').innerHTML === 'O' && document.getElementById('middleCenter').innerHTML === 'O' && document.getElementById('middleRight').innerHTML === 'O' ||
-        document.getElementById('bottomLeft').innerHTML === 'O' && document.getElementById('bottomCenter').innerHTML === 'O' && document.getElementById('bottomRight').innerHTML === 'O' ||
-        document.getElementById('topLeft').innerHTML === 'O' && document.getElementById('middleLeft').innerHTML === 'O' && document.getElementById('bottomLeft').innerHTML === 'O' || 
-        document.getElementById('topCenter').innerHTML === 'O' && document.getElementById('middleCenter').innerHTML === 'O' && document.getElementById('bottomCenter').innerHTML === 'O' ||
-        document.getElementById('topRight').innerHTML === 'O' && document.getElementById('middleRight').innerHTML === 'O' && document.getElementById('bottomRight').innerHTML === 'O' ||
-        document.getElementById('topLeft').innerHTML === 'O' && document.getElementById('middleCenter').innerHTML === 'O' && document.getElementById('bottomRight').innerHTML === 'O' ||
-        document.getElementById('topRight').innerHTML === 'O' && document.getElementById('middleCenter').innerHTML === 'O' && document.getElementById('middleRight').innerHTML === 'O')
-        
-
-            gameOver = true;
-            setTimeout(function() {
-                alert('O Wins the Game!');
-            }, 100);
-        {
-    }
+	}
 };
 
-function checkDraw(e) {
-    if (document.getElementById('topLeft').innerHTML === 'X' && document.getElementById('topCenter').innerHTML === 'O' && document.getElementById('topRight').innerHTML === 'X' ||
-        document.getElementById('topLeft').innerHTML === 'O' && document.getElementById('topCenter').innerHTML === 'X' && document.getElementById('topRight').innerHTML === 'O' ||
-        document.getElementById('middleLeft').innerHTML === 'X' && document.getElementById('middleCenter').innerHTML === 'O' && document.getElementById('middleRight').innerHTML === 'X' ||
-        document.getElementById('middleLeft').innerHTML === 'O' && document.getElementById('middleCenter').innerHTML === 'X' && document.getElementById('middleRight') === 'O' ||
-        document.getElementById('bottomLeft').innerHTML === 'X' && document.getElementById('bottomCenter').innerHTML === 'O' && document.getElementById('bottomRight').innerHTML === 'X' ||
-        document.getElementById('bottomLeft').innerHTML === 'O' && document.getElementById('bottomCenter').innerHTML === 'X' && document.getElementById('bottomRight').innerHTML === 'O' ||
-        document.getElementById('topLeft').innerHTML === 'X' && document.getElementById('middleLeft').innerHTML === 'O' && document.getElementById('bottomLeft').innerHTML === 'X' ||
-        document.getElementById('topLeft').innerHTML === 'O' && document.getElementById('middleLeft').innerHTML === 'X' && document.getElementById('bottomLeft').innerHTML === 'O' ||
-        document.getElementById('topMiddle').innerHTML === 'X' && document.getElementById('middleCenter').innerHTML === 'O' && document.getElementById('bottomMiddle').innerHTML === 'X' ||
-        document.getElementById('topMiddle').innerHTML === 'O' && document.getElementById('middlecenter').innerHTML === 'X' && document.getElementById('bottomMiddle').innerHTML === 'O' ||
-        document.getElementById('topRight').innerHTML === 'X' && document.getElementById('midddleRight').innerHTML === 'O' && document.getElementById('bottomRight').innerHTML === 'X' ||
-        document.getElementById('topRight').innerHTML === 'O' && document.getElementById('middleRight').innerHTML === 'X' && document.getElementById('bottomRight').innerHTML === 'O' ||
-        document.getElementById('topLeft').innerHTML === 'X' && document.getElementById('middleCenter').innerHTML === 'O' && document.getElementById('bottomRight').innerHTML === 'X' ||
-        document.getElementById('topLeft').innerHTML === 'O' && document.getElementById('middleCenter').innerHTML === 'X' && document.getElementById('bottomRight').innerHTML === 'O' ||
-        document.getElementById('topRight').innerHTML === 'X' && document.getElementById('middleCenter').innerHTML === 'O' && document.getElementById('bottomLeft').innerHTML === 'X' ||
-        document.getElementById('topRight').innerHTML === 'O' && document.getElementById('middleCenter').innerHTML === 'X' && document.getElementById('bottomRight').innerHTML === 'O')
-        {
-    
-            draw = true;
-            setTimeout(function() {
-                alert('Tie Game!');
-            }, 100);
-    }  
-};
+
+
+
 
 
 
