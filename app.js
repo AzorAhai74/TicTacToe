@@ -1,86 +1,87 @@
 let players = ['X', 'O'];
-let currentTurn = 0;
-let gameOver = false;
-let draw = false;
-let blankCell = false;
+let currentTurn;
 
 
 
 
 let cells = document.querySelectorAll('.cell');
 
-let gameboardCells = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9'];
 
-
-
-let topLeft = document.getElementById([1]);
-let topCenter = document.getElementById([2]);
-let topRight = document.getElementById([3]);
-let middleLeft = document.getElementById([4]);
-let middleCenter = document.getElementById([5]);
-let middleRight = document.getElementById([6]);
-let bottomLeft = document.getElementById([7]);
-let bottomCenter = document.getElementById([8]);
-let bottomRight = document.getElementById([9]);
 
 cells.forEach(function(cell) {
-    cell.addEventListener('click', cellClicked);
+    cell.addEventListener('click', cellClicked) 
 });
 
-function validateCell() {
-	if (gameboardCells == '') {
-		blankCell = true;
-	} else {
-		blankCell = false;
-		return false;
-	}
-};
 
-function startGame() {
-    alert('You are X');
-};
+
 
 
 function cellClicked(e) {
-    if (gameOver === true) {
-        clearBoard();
-        return;
-    }
-
-    if (e.target.textContent === 'X' || e.target.textContent === 'O') {
-        return;
-    }
-
-    e.target.textContent = players[currentTurn];
-	startGame();
-    toggle();
-    
+	cells.forEach(function(cell){
+	if (cell.textContent == '') {
+	e.target.textContent = 'X';	
+	switchPlayer();
+	} 
+	});
+	var blankCells = [];
+	var random;
+	for (var i = 1; i < 9; i++) {
+		if (cells[i].textContent = '') {
+			blankCells.push(cells[i]);
+		}
+	}
+	if (cells.textContent == '') {
+		blankCells.push(cells);
+	};
+	cells.forEach(function(cell) {
+		if (cell.textContent == '') {
+			blankCells.push(cell);	
+			random = Math.ceil(Math.random() * blankCells.length) - 1;
+			blankCells[random].textContent = 'O';
+			switchPlayer();
+		}
+	});	
+	
 };
 
-function toggle() {
-    if (currentTurn === 0) {
-        currentTurn = 1;
-    } else {
-        currentTurn = 0;
-    }
+function switchPlayer() {
+	if (currentTurn == 'X') {
+		currentTurn = 'O';
+	} else {
+		currentTurn = 'X';
+	}
 }
 
-function computerTurn() {
-	var blanks = [];
-	var place = gameboardCells[i].innerText;	
-	if (place == '') {
-		blanks.push([i]);
-	}
-	for (var i = 1; i <= 9; i++) {
-		if (blanks.length > 0) {
-		var randomNumber = Math.floor((Math.random() * 9) + 1);
-		var randomSquare = ('cell' + randomNumber);
-		validateCell(randomSquare);
-		toggle();
-		}
 
-	}
+
+function clearBoard() {
+	location.reload();
+}
+
+function checkRow() {
+	winner(document.getElementById('c1'), document.getElementById('c2'), document.getElementById('c3'));
+	winner(document.getElementById('c4'), document.getElementById('c5'), document.getElementById('c6'));
+	winner(document.getElementById('c7'), document.getElementById('c8'), document.getElementById('c9'));
+	winner(document.getElementById('c1'), document.getElementById('c4'), document.getElementById('c7'));
+	winner(document.getElementById('c2'), document.getElementById('c5'), document.getElementById('c8'));
+	winner(document.getElementById('c3'), document.getElementById('c6'), document.getElementById('c9'));
+	winner(document.getElementById('c1'), document.getElementById('c5'), document.getElementById('c9'));
+	winner(document.getElementById('c3'), document.getElementById('c5'), document.getElementById('c7'));
 };
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
 
 
 
