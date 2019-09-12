@@ -22,3 +22,4 @@ document.querySelector and document.querySelectorAll
 textContent property of the cells.
 The click event passes in an object that has a target property. This is the element that was clicked!
 addEventListener will let you respond to events on an element like "click".
+test
