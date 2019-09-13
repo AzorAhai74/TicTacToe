@@ -1,7 +1,7 @@
 let players = ['X', 'O'];
 let currentTurn;
 
-
+let cpu = 'O';
 
 
 let cells = document.querySelectorAll('.cell');
