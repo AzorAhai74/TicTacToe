@@ -4,15 +4,17 @@ let players = ['X', 'O'];
 
 let gameOver = false;
 
-
-
-
 let cells = document.querySelectorAll('.cell');
 
+let places = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9'];
 
 cells.forEach(function(cell) {
     cell.addEventListener('click', cellClicked);
 })
+
+
+
+
 
 
 function cellClicked(e) {
@@ -25,18 +27,20 @@ function cellClicked(e) {
 		return;
 	}
 	e.target.textContent = players[currentTurn];
+	checkWinner();
+	checkDraw()
 	switchTurn();
 }
 
-function checkWinner(e) {
-	if (document.querySelector('c1').textContent === 'X' && document.querySelector('c2').textContent === 'X' && document.querySelector('c3') === 'X' ||
-		document.querySelector('c4').textContent === 'X' && document.querySelector('c5').textContent === 'X' && document.querySelector('c6') === 'X' ||
-		document.querySelector('c7').textContent === 'X' && document.querySelector('c8').textContent === 'X' && document.querySelector('c9') === 'X' ||
-		document.querySelector('c1').textContent === 'X' && document.querySelector('c3').textContent === 'X' && document.querySelector('c7') === 'X' ||
-		document.querySelector('c2').textContent === 'X' && document.querySelector('c5').textContent === 'X' && document.querySelector('c8') === 'X' ||
-		document.querySelector('c3').textContent === 'X' && document.querySelector('c6').textContent === 'X' && document.querySelector('c9') === 'X' ||
-		document.querySelector('c1').textContent === 'X' && document.querySelector('c5').textContent === 'X' && document.querySelector('c9') === 'X' ||
-		document.querySelector('c3').textContent === 'X' && document.querySelector('c5').textContent === 'X' && document.querySelector('c7') === 'X' ) {
+function checkWinner() {
+	if (document.getElementById('c1').textContent === 'X' && document.getElementById('c2').textContent === 'X' && document.getElementById('c3').textContent === 'X' ||
+		document.getElementById('c4').textContent === 'X' && document.getElementById('c5').textContent === 'X' && document.getElementById('c6').textContent === 'X' ||
+		document.getElementById('c7').textContent === 'X' && document.getElementById('c8').textContent === 'X' && document.getElementById('c9').textContent === 'X' ||
+		document.getElementById('c1').textContent === 'X' && document.getElementById('c3').textContent === 'X' && document.getElementById('c7').textContent === 'X' ||
+		document.getElementById('c2').textContent === 'X' && document.getElementById('c5').textContent === 'X' && document.getElementById('c8').textContent === 'X' ||
+		document.getElementById('c3').textContent === 'X' && document.getElementById('c6').textContent === 'X' && document.getElementById('c9').textContent === 'X' ||
+		document.getElementById('c1').textContent === 'X' && document.getElementById('c5').textContent === 'X' && document.getElementById('c9').textContent === 'X' ||
+		document.getElementById('c3').textContent === 'X' && document.getElementById('c5').textContent === 'X' && document.getElementById('c7').textContent === 'X' ) {
 		{
 			gameOver = true;
 			setTimeout(function() {
@@ -45,14 +49,14 @@ function checkWinner(e) {
 			document.getElementById('message').textContent = 'Game Over';
 		}
 	} else if 
-		(document.querySelector('c1').textContent === 'O' && document.querySelector('c2').textContent === 'O' && document.querySelector('c3') === 'O' ||
-		document.querySelector('c4').textContent === 'O' && document.querySelector('c5').textContent === 'O' && document.querySelector('c6') === 'O' ||
-		document.querySelector('c7').textContent === 'O' && document.querySelector('c8').textContent === 'O' && document.querySelector('c9') === 'O' ||
-		document.querySelector('c1').textContent === 'O' && document.querySelector('c3').textContent === 'O' && document.querySelector('c7') === 'O' ||
-		document.querySelector('c2').textContent === 'O' && document.querySelector('c5').textContent === 'O' && document.querySelector('c8') === 'O' ||
-		document.querySelector('c3').textContent === 'O' && document.querySelector('c6').textContent === 'O' && document.querySelector('c9') === 'O' ||
-		document.querySelector('c1').textContent === 'O' && document.querySelector('c5').textContent === 'O' && document.querySelector('c9') === 'O' ||
-		document.querySelector('c3').textContent === 'O' && document.querySelector('c5').textContent === 'O' && document.querySelector('c7') === 'O')
+		(document.getElementById('c1').textContent === 'O' && document.getElementById('c2').textContent === 'O' && document.getElementById('c3').textContent === 'O' ||
+		document.getElementById('c4').textContent === 'O' && document.getElementById('c5').textContent === 'O' && document.getElementById('c6').textContent === 'O' ||
+		document.getElementById('c7').textContent === 'O' && document.getElementById('c8').textContent === 'O' && document.getElementById('c9').textContent === 'O' ||
+		document.getElementById('c1').textContent === 'O' && document.getElementById('c3').textContent === 'O' && document.getElementById('c7').textContent === 'O' ||
+		document.getElementById('c2').textContent === 'O' && document.getElementById('c5').textContent === 'O' && document.getElementById('c8').textContent === 'O' ||
+		document.getElementById('c3').textContent === 'O' && document.getElementById('c6').textContent === 'O' && document.getElementById('c9').textContent === 'O' ||
+		document.getElementById('c1').textContent === 'O' && document.getElementById('c5').textContent === 'O' && document.getElementById('c9').textContent === 'O' ||
+		document.getElementById('c3').textContent === 'O' && document.getElementById('c5').textContent === 'O' && document.getElementById('c7').textContent === 'O') {
 		{
 			gameOver = true;
 			setTimeout(function() {
@@ -60,7 +64,42 @@ function checkWinner(e) {
 			}, 100);
 			document.getElementById('message').textContent = 'Game Over';
 		}
-	} 
+	}
+}
+
+function checkDraw() {
+	if (places.textContent !== '' &&  {
+		gameOver = true;
+		setTimeout(function() {
+			alert('Tie Game!')
+		}, 100);
+		document.getElementById('message').textContent = 'Game Over';
+	}
+}
+
+
+	
+
+
+function switchTurn() {
+    if (currentTurn === 0) {
+        currentTurn = 1;
+    } else {
+    currentTurn = 0;
+    }
+}
+
+function clearBoard() {
+    location.reload();
+}
+	
+
+
+ 
+		
+
+
+
 
 
 
@@ -74,17 +113,6 @@ function checkWinner(e) {
 
 	
 
-function switchTurn() {
-    if (currentTurn === 0) {
-        currentTurn = 1;
-    } else {
-    currentTurn = 0;
-    }
-}
-
-function clearBoard() {
-    location.reload();
-}
 
 
 

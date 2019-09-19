@@ -15,6 +15,14 @@
     grid-template: repeat(3, 1fr) / repeat(3, 1fr)
 }
 
+#message {
+    text-align: center;
+    font-size: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: red;
+    text-emphasis: bold;
+}
+
 
 
 .cell {
