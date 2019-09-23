@@ -6,17 +6,13 @@ let gameOver = false;
 
 let cells = document.querySelectorAll('.cell');
 
-let places = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9'];
 
 cells.forEach(function(cell) {
     cell.addEventListener('click', cellClicked);
 })
 
 
-
-
-
-
+//When a cell is clicked X or O will be displayed and that cell cannot be clicked again//
 function cellClicked(e) {
     if (gameOver == true) {
         clearBoard();
@@ -31,6 +27,11 @@ function cellClicked(e) {
 	checkWinner();
 	switchTurn();
 }
+
+
+
+
+
 
 function checkWinner() {
 	if (document.getElementById('c1').textContent === 'X' && document.getElementById('c2').textContent === 'X' && document.getElementById('c3').textContent === 'X' ||
@@ -114,9 +115,6 @@ function checkDraw() {
 		document.getElementById('message').textContent = 'Game Over';
 	}
 }
-
-
-	
 
 
 function switchTurn() {
