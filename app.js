@@ -107,8 +107,15 @@ function checkDraw() {
 	document.getElementById('c7').textContent === 'O' && document.getElementById('c8').textContent === 'X' && document.getElementById('c9').textContent === 'X' ||
 	document.getElementById('c1').textContent === 'O' && document.getElementById('c2').textContent === 'X' && document.getElementById('c3').textContent === 'X' &&
 	document.getElementById('c4').textContent === 'X' && document.getElementById('c5').textContent === 'O' && document.getElementById('c6').textContent === 'O' &&
+	document.getElementById('c7').textContent === 'X' && document.getElementById('c8').textContent === 'O' && document.getElementById('c9').textContent === 'X' ||
+	document.getElementById('c1').textContent === 'O' && document.getElementById('c2').textContent === 'O' && document.getElementById('c3').textContent === 'X' &&
+	document.getElementById('c4').textContent === 'X' && document.getElementById('c5').textContent === 'X' && document.getElementById('c6').textContent === 'O' &&
+	document.getElementById('c7').textContent === 'O' && document.getElementById('c8').textContent === 'O' && document.getElementById('c9').textContent === 'X' ||
+	document.getElementById('c1').textContent === 'O' && document.getElementById('c2').textContent === 'X' && document.getElementById('c3').textContent === 'O' &&
+	document.getElementById('c4').textContent === 'X' && document.getElementById('c5').textContent === 'O' && document.getElementById('c6').textContent === 'X' &&
 	document.getElementById('c7').textContent === 'X' && document.getElementById('c8').textContent === 'O' && document.getElementById('c9').textContent === 'X') {
- 		gameOver = true;
+	
+	gameOver = true;
 		setTimeout(function() {
 			alert('Tie Game!')
 		}, 100);
